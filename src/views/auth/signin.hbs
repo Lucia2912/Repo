@@ -1,0 +1,30 @@
+{{> navbar}}
+<div class="banner"> 
+<div class="container p-4">
+	<div class="row">
+		{{> message }}
+		<div class="col-md-4 mx-auto">
+			<div class="card text-center">
+				<div class="card-header">
+					<h3>Ingresar</h3>
+				</div>
+				<div class="card-body">
+					<form action="/signin" method="post">
+						<div class="form-group">
+							<input type="email" name="correo" placeholder="Correo" class="form-control" autofocus="">
+						</div>
+						<div class="form-group">
+							<input type="password" name="cont" placeholder="Contraseña" class="form-control">
+						</div>                     
+						<div class="form-group">
+							<button class="btn btn-success btn-block">
+								Ingresar
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		<div>
+	</div>
+</div>
+</div>

@@ -1,0 +1,333 @@
+{{> navbar}}
+<div class="banner">
+    <form action="/pasantias/editar/{{pasantia.id}}" method="POST" enctype="multipart/form-data">
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Pasantia</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Nombre de pasantia</label>
+                                <input type="text" name="nombrePas" value="{{pasantia.Nombre}}"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre del alumno</label>
+                                <input type="text" id="nom" name="nom" value="{{pasantia.NombreAlum}}"
+                                    class="form-control" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Generacion</label>
+                                <input type="text" id="gen" name="gen" value="{{pasantia.Generacion}}"
+                                    class="yearpicker form-control" required>
+                            </div>
+                            <br>
+                            {{#ifEquals pasantia.Aprobo 1 }}
+                            <span>Aprobo:</span>
+                            <div class="form-group">
+                                <label class="radio-inline"><input type="radio" name="aprobado" value="si"
+                                        checked>Si</label>
+                                <label class="radio-inline"><input type="radio" name="aprobado" value="no">No</label>
+                            </div>
+                            {{/ifEquals}}
+                            {{#ifEquals pasantia.Aprobo 0 }}
+                            <span>Aprobo:</span>
+                            <div class="form-group">
+                                <label class="radio-inline"><input type="radio" name="vinculoLab" value="si">Si</label>
+                                <label class="radio-inline"><input type="radio" name="vinculoLab" value="no"
+                                        checked>No</label>
+                            </div>
+                            {{/ifEquals}}
+                            <br>
+                            {{#ifEquals pasantia.VinculoLab 1 }}
+                            <span>Vinculo laboral:</span>
+                            <div class="form-group">
+                                <label class="radio-inline"><input type="radio" name="vinculoLab" value="si"
+                                        checked>Si</label>
+                                <label class="radio-inline"><input type="radio" name="vinculoLab" value="no">No</label>
+                            </div>
+                            {{/ifEquals}}
+                            {{#ifEquals pasantia.VinculoLab 0 }}
+                            <span>Vinculo laboral:</span>
+                            <div class="form-group">
+                                <label class="radio-inline"><input type="radio" name="vinculoLab" value="si">Si</label>
+                                <label class="radio-inline"><input type="radio" name="vinculoLab" value="no"
+                                        checked>No</label>
+                            </div>
+                            {{/ifEquals}}
+                            <br>
+                            <div class="form-group">
+                                <label>Año de realizacion</label>
+                                <input type="text" id="datepicker" name="anio" value="{{pasantia.anioRealizacion}}"
+                                    placeholder="Año de realizacion" class="yearpicker form-control" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Fecha de inicio</label>
+                                <input type="date" name="inicio" class="form-control"
+                                    value="{{#formatoFecha pasantia.FecInicio }} {{/formatoFecha}}" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Fecha de fin</label>
+                                <input type="date" name="fin" class="form-control"
+                                    value="{{#formatoFecha pasantia.FecFin }} {{/formatoFecha}}" required>
+                            </div>
+                            <br>
+                            {{#if pasantia.Tareas}}
+                            <div class="form-group">
+                                <label>Tareas asignadas</label>
+                                <textarea name="tareas" cols="40" rows="5" class="form-control"
+                                    required>{{pasantia.Tareas}}</textarea>
+                            </div>
+                            {{/if}}
+                            <br>
+                            <div class="form-group">
+                                <label>Tutor academico</label>
+                                <input type="text" name="tutorA" value="{{pasantia.TutorA}}" class="form-control"
+                                    required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Tutor cliente</label>
+                                <input type="text" name="tutorC" value="{{pasantia.TutorCli}}" class="form-control"
+                                    required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Empresa</label>
+                                <input type="text" name="empr" value="{{pasantia.Empresa}}" class="form-control"
+                                    required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Modalidad</label>
+                                <input type="text" name="modalidad" value="{{pasantia.Modalidad}}" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Galeria</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="gallery">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="popup-gallery">
+                                                {{#each imgs}}
+                                                <a href="{{Ruta}}" class="image">
+                                                    <img src="{{Ruta}}" alt="Alt text" width="100" height="100" />
+                                                    <div class="form-group">
+                                                        <a class="btn btn-danger"
+                                                            href="/pasantias/eliminarImg/{{id}}">Eliminar</a>
+                                                    </div>
+                                                </a>
+                                                {{/each}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Imagenes</label>
+                                <a href="javascript:void(0)" onclick="$('#pro-image').click()"><i
+                                        class="fa fa-plus"></i>Elegir imagenes</a>
+                                <input type="file" id="pro-image" name="pro-image" style="display: none;"
+                                    class="form-control" multiple>
+                            </div>
+                            <div class="form-group">
+                                <div class="preview-images-zone"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Documentacion</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Agregar documentacion</label>
+                                <input type="file" class="filestyle" name="documents"
+                                    data-buttonText="Seleccione un archivo" multiple>
+                                {{#each docu}}
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-danger" href="/pasantias/eliminarDoc/{{id}}">Eliminar</a>
+                            </div>
+                            <div class="form-group">
+                                <iframe src="{{Ruta}}" width="500" height="500"></iframe>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Acuerdo</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Acuerdo</label>
+                                <input type="file" name="acuerdo" class="filestyle"
+                                    data-buttonText="Seleccione un archivo">
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-danger" href="/pasantias/eliminarAc/{{id}}">Eliminar</a>
+                            </div>
+                            <div class="form-group">
+                                <iframe src="{{acuerdo.Ruta}}" width="500" height="500"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Cartas</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Carta de inicio</label>
+                                <input type="file" name="inicio" class="filestyle"
+                                    data-buttonText="Seleccione un archivo">
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-danger" href="/pasantias/eliminarCI/{{id}}">Eliminar</a>
+                            </div>
+                            <div class="form-group">
+                                <iframe src="{{inicio.Ruta}}" width="500" height="500"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Cartas</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Carta de fin</label>
+                                <input type="file" name="fin" class="filestyle" data-buttonText="Seleccione un archivo">
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-danger" href="/pasantias/eliminarCF/{{id}}">Eliminar</a>
+                            </div>
+                            <div class="form-group">
+                                <iframe src="{{fin.Ruta}}" width="500" height="500"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Investigacion</h3>
+                        </div>
+                        <div class="card-body">
+                            {{#each invest}}
+                            <div class="form-group">
+                                <a class="btn btn-danger" href="/pasantias/eliminarInv/{{id}}">Eliminar</a>
+                            </div>
+                            <div class="form-group">
+                                <iframe src="{{Ruta}}" width="500" height="500"></iframe>
+                            </div>
+                            {{/each}}
+                            <div class="form-group">
+                                <label>Investigacion</label>
+                                <input type="file" class="filestyle" name="invest"
+                                    data-buttonText="Seleccione un archivo" multiple>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Video Presentacion</h3>
+                        </div>
+                        <div class="card-body">
+                            {{#each vidPres}}
+                            <div class="form-group">
+                                <a class="btn btn-danger" href="/pasantias/eliminarVid/{{id}}">Eliminar</a>
+                            </div>
+                            <div class="form-group">
+                                <video src="{{ Ruta }}" width="640" height="480" controls></video>
+                            </div>
+                            {{/each}}
+                            <label>Video de presentacion</label>
+                            <div class="form-group">
+                                <input type="file" class="filestyle" name="videoPres" id="videoPres"
+                                    data-buttonText="Seleccione un archivo" multiple><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <a class="btn btn-danger" href="/pasantias/eliminarCod/{{cod.id}}">Eliminar</a>
+                                <a href="/pasantia/descargarCodigo/{{pasantia.id}}">Codigo</a>
+                            </div>
+                            <div class="form-group">
+                                <label>Codigo</label>
+                                <input type="file" class="filestyle" name="codigo"
+                                    data-buttonText="Seleccione un archivo" multiple>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success btn-block">
+                Modificar
+            </button>
+        </div>
+    </form>
+</div>

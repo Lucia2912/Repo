@@ -1,0 +1,415 @@
+{{> navbar}}
+<div class="banner">
+    <form method="post" enctype="multipart/form-data">
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Videos</h3>
+                </div>
+                <div class="card-body">
+                    {{#each vid}}
+                    <div class="form-group">
+                        <a class="btn btn-danger" href="/proyectos/eliminarVid/{{id}}">Eliminar</a>
+                    </div>
+                    <div class="form-group">
+                        <video src="{{ Ruta }}" width="640" height="480" controls></video>
+                    </div>
+                    {{/each}}
+                        <label>Videos</label>
+                        <div class="form-group">
+                            <input type="file" class="filestyle" name="file1" id="file1" onchange="uploadFile()"
+                                data-buttonText="Seleccione un archivo" multiple><br>
+                            <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+                            <h3 id="status"></h3>
+                            <p id="loaded_n_total"></p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+    <form action="/proyectos/editar/{{proyecto.id}}" method="POST" enctype="multipart/form-data">
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Proyecto</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Titulo</label>
+                                <input type="text" name="titulo" value="{{proyecto.titulo}}" class="form-control">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Año de realizacion</label>
+                                <input type="text" id="anio" name="anio" value="{{proyecto.anioRealizacion}}"
+                                    class="yearpicker form-control">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Fecha de inicio</label>
+                                <input type="date" name="inicio" class="form-control"
+                                    value="{{#formatoFecha proyecto.FechaInicio }} {{/formatoFecha}}">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Fecha de fin</label>
+                                <input type="date" name="fin" class="form-control"
+                                    value="{{#formatoFecha proyecto.FechaFin }} {{/formatoFecha}}">
+                            </div>
+                            <br>
+                            {{#if proyecto.resumen}}
+                            <div class="form-group">
+                                <label>Resumen</label>
+                                <textarea name="resumen" cols="40" rows="5" class="form-control">{{proyecto.resumen}}</textarea>
+                            </div>
+                            {{/if}}
+                            {{#if proyecto.link}}
+                            <div class="form-group">
+                                <label>Link de presentacion</label>
+                                <input type="text" name="link" value="{{proyecto.link}}" class="form-control">
+                            </div>
+                            {{/if}}
+                            <br>
+                            <div class="form-group">
+                                <label>Tutor academico</label>
+                                <input type="text" id="tutA" name="tutA" value="{{proyecto.TutorAcademico}}"
+                                    class="form-control">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Tutor cliente</label>
+                                <input type="text" id="tutC" name="tutC" value="{{proyecto.TutorCliente}}"
+                                    class="form-control">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Empresa</label>
+                                <input type="text" id="emp" name="emp" value="{{proyecto.Empresa}}"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Grupo de proyecto</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="myTable" class="table order-list">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre completo</th>
+                                        <th scope="col">Nota de aprobacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each grupo}}
+                                    <tr>
+                                        <td><input type="text" id="nom" name="nom" value="{{NombreCompleto}}"
+                                                class="form-control"></td>
+                                        <td><input type="number" id="nota" name="notita" value="{{ Nota }}"
+                                                class="form-control">
+                                        </td>
+                                        <td><a href="/proyectos/eliminarInt/{{id}}" class="btn btn-danger">Borrar</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="text-align: left;">
+                                            <input type="button" class="btn btn-success btn-block " id="addrow"
+                                                value="Agregar integrante" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Tribunal</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="myTable2" class="table order-list2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre completo</th>
+                                        <th scope="col">Cargo</th>
+                                        <th scope="col">Empresa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each trib}}
+                                    <tr>
+                                        <td><input type="text" id="nomCom" name="nomCom" value="{{NombreCompleto}}"
+                                                class="form-control"></td>
+                                        <td><input type="text" id="cargo" name="cargoTut" value="{{ cargo }}"
+                                                class="form-control">
+                                        </td>
+                                        <td><input type="text" id="emprTut" name="Tutempr" value="{{ empresa }}"
+                                                class="form-control">
+                                        </td>
+                                        <td><a href="/proyectos/eliminarTrib/{{id}}" class="btn btn-danger">Borrar</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="text-align: left;">
+                                            <input type="button" class="btn btn-success btn-block " id="addTutor"
+                                                value="Agregar integrante" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-9">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Galeria</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="gallery">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="popup-gallery">
+                                                {{#each imgs}}
+                                                <a href="{{Ruta}}" class="image">
+                                                    <img src="{{Ruta}}" alt="Alt text" width="100" height="100" />
+                                                    <div class="form-group">
+                                                        <a class="btn btn-danger"
+                                                            href="/proyectos/eliminarImg/{{id}}">Eliminar</a>
+                                                    </div>
+                                                </a>
+                                                {{/each}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Imagenes</label>
+                                <a href="javascript:void(0)" onclick="$('#pro-image').click()"><i
+                                        class="fa fa-plus"></i>Elegir
+                                    imagenes</a>
+                                <input type="file" id="pro-image" name="pro-image" style="display: none;"
+                                    class="form-control" multiple>
+                            </div>
+                            <div class="form-group">
+                                <div class="preview-images-zone"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Documentacion</h3>
+                </div>
+                <div class="card-body">
+                    <label>Agregar documentacion</label>
+                    <input type="file" class="filestyle" name="documents" data-buttonText="Seleccione un archivo"
+                        multiple>
+                    {{#each docu}}
+                    <div class="form-group">
+                        <a class="btn btn-danger" href="/proyectos/eliminarDoc/{{id}}">Eliminar</a>
+                    </div>
+                    <div class="form-group">
+                        <iframe src="{{Ruta}}" width="500" height="500"></iframe>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Investigacion</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Investigacion</label>
+                        <input type="file" class="filestyle" name="invest" data-buttonText="Seleccione un archivo"
+                            multiple>
+                    </div>
+                    {{#each invest}}
+                    <div class="card-body">
+                        <a class="btn btn-danger" href="/proyectos/eliminarInv/{{id}}">Eliminar</a>
+                    </div>
+                    <div class="card-body">
+                        <iframe src="{{Ruta}}" width="500" height="500"></iframe>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Resumen</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Resumen</label>
+                        <input type="file" class="filestyle" name="resumenpdf" data-buttonText="Seleccione un archivo"
+                            multiple>
+                    </div>
+                    {{#each resu}}
+                    <div class="form-group">
+                        <a class="btn btn-danger" href="/proyectos/eliminarRes/{{id}}">Eliminar</a>
+                    </div>
+                    <div class="form-group">
+                        <iframe src="{{Ruta}}" width="500" height="500"></iframe>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Banner</h3>
+                </div>
+                <div class="card-body">
+                    {{#each banner}}
+                    <div class="form-group">
+                        <a class="btn btn-danger" href="/proyectos/eliminarBan/{{id}}">Eliminar</a>
+                    </div>
+                    <div class="form-group">
+                        <img src="{{Ruta}}" width="500" height="500"></img>
+                    </div>
+                    {{/each}}
+                    <div class="form-group">
+                        <label>Añadir mas imagenes</label>
+                        <input type="file" class="filestyle" name="banner" data-buttonText="Seleccione un archivo"
+                            multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Video Presentacion</h3>
+                </div>
+                <div class="card-body">
+                    {{#each vidPres}}
+                    <div class="form-group">
+                        <a class="btn btn-danger" href="/usuarios/eliminarVidP/{{id}}">Eliminar</a>
+                    </div>
+                    <div class="form-group">
+                        <video src="{{ Ruta }}" width="640" height="480" controls></video>
+                    </div>
+                    {{/each}}
+                    <label>Video de presentacion</label>
+                    <div class="form-group">
+                        <input type="file" class="filestyle" name="videoPres" id="videoPres"
+                            data-buttonText="Seleccione un archivo" multiple><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Presentacion</h3>
+                </div>
+                <div class="card-body">
+                    {{#each pres}}
+                    <div class="form-group">
+                        <a class="btn btn-danger" href="/usuarios/eliminarP/{{id}}">Eliminar</a>
+                        <a href="/proyectos/descargarPres/{{id}}">Presentacion</a>
+                    </div>
+                    {{/each}}
+                    <label for="present">Presentacion</label>
+                    <div class="form-group">
+                        <input type="file" class="filestyle" name="present" id="videoPres"
+                            data-buttonText="Seleccione un archivo" multiple><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="form-group">
+                        <a class="btn btn-danger" href="/Proyectos/eliminarCod/{{cod.id}}">Eliminar</a>
+                        <a href="/proyectos/descargarCodigo/{{proyecto.id}}">Codigo</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="codigo">Codigo</label>
+                        <input type="file" class="filestyle" name="codigo" data-buttonText="Seleccione un archivo"
+                            multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <button class="btn btn-success btn-block">
+        Modificar
+    </button>
+</div>
+</form>
+<br>
+</div>

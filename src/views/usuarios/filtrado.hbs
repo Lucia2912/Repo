@@ -1,0 +1,150 @@
+{{> navbar}}
+<div class="banner">
+    <div class="row" style="width: 100%; margin: 0 auto">
+        <div class="container"></div>
+        <div class="col-sm-7" style="float: left">
+            <div class="card border-primary mb-7">
+                <div class="card-header">Pasantias</div>
+                <div class="card-body text-primary">
+                    <table class="table table-sm">
+                        {{#if pasantias}}
+                        <thead>
+                            <tr>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Nombre completo del alumno</th>
+                                <th scope="col">Generacion</th>
+                                <th scope="col">Año de realizacion</th>
+                                <th scope="col">Ver detalles</th>
+                                {{#if user}}
+                                {{#ifEquals user.Rol "SuperAdministrador"}}
+                                <th scope="col">Modificar</th>
+                                <th scope="col">Eliminar</th>
+                                {{/ifEquals}}
+                                {{#ifEquals user.Rol "Administrador"}}
+                                <th scope="col">Modificar</th>
+                                <th scope="col">Eliminar</th>
+                                {{/ifEquals}}
+                                {{/if}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each pasantias}}
+                            <tr>
+                                {{#if Nombre}}
+                                <td>{{ Nombre }}</td>
+                                {{/if}}
+                                <td>{{ NombreAlum }}</td>
+                                <td>{{ Generacion }}</td>
+                                <td>{{ anioRealizacion }}</td>
+                                {{#if ../user}}
+                                {{#ifEquals ../user.Rol "Visitante"}}
+                                <td><a href="/pasantias/detalles/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                {{/ifEquals}}
+                                {{#ifEquals ../user.Rol "Intermedio"}}
+                                <td><a href="/pasantias/detalle/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                {{/ifEquals}}
+                                {{#ifEquals ../user.Rol "SuperAdministrador"}}
+                                <td><a href="/pasantias/detalle/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                <td><a href="/pasantias/editar/{{../id}}" class="btn btn-warning"><i
+                                            class="far fa-edit"></i></a></td>
+                                <td><a href="/pasantias/eliminar/{{../id}}" class="btn btn-danger"><i
+                                            class="fas fa-times"></i></a></td>
+                                {{/ifEquals}}
+                                {{#ifEquals ../user.Rol "Administrador"}}
+                                <td><a href="/pasantias/detalle/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                <td><a href="/pasantias/editar/{{../id}}" class="btn btn-warning"><i
+                                            class="far fa-edit"></i></a></td>
+                                <td><a href="/pasantias/eliminar/{{../id}}" class="btn btn-danger"><i
+                                            class="fas fa-times"></i></a></td>
+                                {{/ifEquals}}
+                                {{else}}
+                                <td><a href="/pasantias/detalles/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                {{/if}}
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        {{else}}
+                        <tbody>
+                            <h3>No se han encontrado resultados</h3>
+                        </tbody>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5" style="float: right">
+            <div class="card border-primary mb-5">
+                <div class="card-header">Proyectos</div>
+                <div class="card-body text-primary">
+                    <table class="table table-sm">
+                        {{#if proyectos}}
+                        <thead>
+                            <tr>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Año de realizacion</th>
+                                <th scope="col">Ver detalles</th>
+                                {{#if user}}
+                                {{#ifEquals user.Rol "SuperAdministrador"}}
+                                <th scope="col">Modificar</th>
+                                <th scope="col">Eliminar</th>
+                                {{/ifEquals}}
+                                {{#ifEquals user.Rol "Administrador"}}
+                                <th scope="col">Modificar</th>
+                                <th scope="col">Eliminar</th>
+                                {{/ifEquals}}
+                                {{/if}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each proyectos}}
+                            <tr>
+                                <td>{{ titulo }}</td>
+                                <td>{{ anioRealizacion }}</td>
+                                {{#if ../user}}
+                                {{#ifEquals ../user.Rol "Visitante"}}
+                                <td><a href="/proyectos/detalles/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                {{/ifEquals}}
+                                {{#ifEquals ../user.Rol "Intermedio"}}
+                                <td><a href="/proyectos/detalle/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                {{/ifEquals}}
+                                {{#ifEquals ../user.Rol "SuperAdministrador"}}
+                                <td><a href="/proyectos/detalle/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                <td><a href="/proyectos/editar/{{../id}}" class="btn btn-warning"><i
+                                            class="far fa-edit"></i></a></td>
+                                <td><a href="/proyectos/eliminar/{{../id}}" class="btn btn-danger"><i
+                                            class="fas fa-times"></i></a></td>
+                                {{/ifEquals}}
+                                {{#ifEquals ../user.Rol "Administrador"}}
+                                <td><a href="/proyectos/detalle/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                <td><a href="/proyectos/editar/{{../id}}" class="btn btn-warning"><i
+                                            class="far fa-edit"></i></a></td>
+                                <td><a href="/proyectos/eliminar/{{../id}}" class="btn btn-danger"><i
+                                            class="fas fa-times"></i></a></td>
+                                {{/ifEquals}}
+                                {{else}}
+                                <td><a href="/proyectos/detalles/{{../id}}" class="btn btn-info"><i
+                                            class="far fa-eye"></i></a></td>
+                                {{/if}}
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        {{else}}
+                        <tbody>
+                            <h3>No se han encontrado resultados</h3>
+                        </tbody>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

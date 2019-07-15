@@ -1,0 +1,226 @@
+{{> navbar}}
+<div class="banner"> 
+<div class="container p-4">
+	<div class="row">
+		<div class="col-md-5 mx-auto">
+			<form action="/pasantias//NuevaPasantia" method="post" id="msform" enctype="multipart/form-data">
+				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="card text-center">
+								<div class="card-header">
+									<h3>Pasantia</h3>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<label>Nombre de pasantia</label>
+										<input type="text" name="nombrePas" placeholder="Nombre de pasantia" class="form-control">
+									</div>
+									<div class="form-group">
+										<table id="myTable" class=" table order-list">
+											<thead>
+												<tr>
+													<td>Nombre del alumno</td>
+													<td>Generacion</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="col-sm-4">
+														<input type="text" name="nombre" class="form-control" required/>
+													</td>
+													<td class="col-sm-4">
+														<input type="text" id="datepicker" name="generacion"
+															placeholder="generacion" class="yearpicker form-control" required>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="form-group">
+										<table id="myTable" class=" table order-list">
+											<thead>
+												<tr>
+													<td>Aprobo</td>
+													<td>Genero vinculo laboral</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="col-sm-4">
+														<label class="radio-inline"><input type="radio" name="aprobado"
+																value="si" checked>Si</label>
+														<label class="radio-inline" ><input type="radio" name="aprobado"
+																value="no">No</label>
+													</td>
+													<td class="col-sm-4">
+														<label class="radio-inline"><input type="radio"
+																name="vinculoLab" value="si" checked>Si</label>
+														<label class="radio-inline"><input type="radio"
+																name="vinculoLab" value="no">No</label>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="form-group">
+										<label>Año de realizacion</label>
+										<input type="text" id="datepicker" name="anio" placeholder="Año de realizacion"
+											class="yearpicker form-control" required>
+									</div>
+									<div class="form-group">
+										<label>Fecha de inicio</label>
+										<input type="date" name="inicio" class="form-control" required>
+									</div>
+									<div class="form-group">
+										<label>Fecha de fin</label>
+										<input type="date" name="fin" class="form-control" required>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success" href="#carouselExampleControls" role="button"
+											data-slide="next">Siguiente</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="card text-center">
+								<div class="card-header">
+									<h3>Pasantia</h3>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<label>Modalidad</label>
+										<input type="text" name="modalidad" placeholder="Modalidad de trabajo"
+											class="form-control" required>
+									</div>
+									<div class="form-group">
+										<label>Tareas asignadas</label>
+										<textarea name="tareas" cols="40" rows="5" class="form-control" placeholder="Escriba las tareas asignadas aqui" required></textarea>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success" href="#carouselExampleControls" role="button"
+											data-slide="prev">Anterior</button>
+										<button class="btn btn-success" href="#carouselExampleControls" role="button"
+											data-slide="next">Siguiente</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="card text-center">
+								<div class="card-header">
+									<h3>Tutores</h3>
+								</div>
+								<div class="card-body">
+									<label>Tutor academico</label>
+									<div class="form-group">
+										<input type="text" name="tutorA" placeholder="Tutor academico"
+											class="form-control" required>
+									</div>
+									<label>Tutor cliente</label>
+									<div class="form-group">
+										<input type="text" name="tutorC" placeholder="Tutor cliente"
+											class="form-control" required>
+									</div>
+									<label>Empresa/organizacion/institucion</label>
+									<div class="form-group">
+										<input type="text" name="empr" placeholder="Empresa/organizacion/institucion"
+											class="form-control" required>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success" href="#carouselExampleControls" role="button"
+											data-slide="prev">Anterior</button>
+										<button class="btn btn-success" href="#carouselExampleControls" role="button"
+											data-slide="next">Siguiente</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="card text-center">
+								<div class="card-header">
+									<h3>Documentos</h3>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<label>Acuerdo</label>
+										<input type="file" name="acuerdo" class="filestyle"
+											data-buttonText="Seleccione un archivo">
+									</div>
+									<div class="form-group">
+										<label>Carta de inicio</label>
+										<input type="file" name="cartaI" class="filestyle"
+											data-buttonText="Seleccione un archivo">
+									</div>
+									<div class="form-group">
+										<label>Carta de finalizacion</label>
+										<input type="file" name="cartaF" class="filestyle"
+											data-buttonText="Seleccione un archivo">
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success" href="#carouselExampleControls" role="button"
+											data-slide="prev">Anterior</button>
+										<button class="btn btn-success" href="#carouselExampleControls" role="button"
+											data-slide="next">Siguiente</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="card text-center">
+								<div class="card-header">
+									<h3>Material</h3>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<label>Investigacion</label>
+										<input type="file" class="filestyle" name="invest"
+											data-buttonText="Seleccione un archivo" multiple>
+									</div>
+									<div class="form-group">
+										<label>Documentacion</label>
+										<input type="file" class="filestyle" name="documents"
+											data-buttonText="Seleccione un archivo" multiple>
+									</div>
+									<div class="form-group">
+										<label>Codigo</label>
+										<input type="file" class="filestyle" name="codigo"
+											data-buttonText="Seleccione un archivo" multiple>
+									</div>
+									<div class="form-group">
+										<label>Imagenes</label>
+										<a href="javascript:void(0)" onclick="$('#pro-image').click()"><i
+												class="fa fa-plus"></i>Elegir imagenes</a>
+										<input type="file" id="pro-image" name="pro-image" style="display: none;"
+											class="form-control" multiple>
+									</div>
+									<div class="form-group">
+										<div class="preview-images-zone">
+
+										</div>
+									</div>
+									<label>Video de presentacion</label>
+									<div class="form-group">
+										<input type="file" class="filestyle" name="videoPres" id="videoPres"
+											data-buttonText="Seleccione un archivo" multiple><br>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success" href="#carouselExampleControls" role="button"
+											data-slide="prev">Anterior</button>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success btn-block">
+											Agregar pasantia
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>

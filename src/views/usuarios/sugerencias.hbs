@@ -1,0 +1,23 @@
+<div class="row">
+    {{#each sugerencias}}
+    <div class="col-sm-3">
+        <div class="card border-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">Sugerencia</div>
+            <div class="card-body text-primary">
+                <p class="card-text">{{Texto}}</p>
+            </div>
+            <div class="card-footer bg-transparent border-primary">{{#dateFormat Fecha }} {{/dateFormat}}</div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+ <div class="card col-sm-4">
+        <h5 class="card-header">Agregar sugerencia</h5>
+        <div class="card-body">
+            <form method="POST" action="/usuarios/sugerencia">
+                <textarea placeholder="Escriba una sugerencia aqui" cols="40" rows="5" name="sug"></textarea>
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </form>
+        </div>
+    </div>

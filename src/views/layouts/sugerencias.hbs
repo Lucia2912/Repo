@@ -1,0 +1,32 @@
+{{> navbar}}
+<div class="contact">
+    <div class="container" >
+    			<h3 class="w3l-titles">Envie su sugerencia</h3>
+		<div class="row" style="width: 100%; background-color: white">
+			<div class="col-md-3 col-sm-3 contact-left">
+				<div class="address">
+					<h4><i class="fa fa-map-marker" aria-hidden="true"></i>Lugar</h4>
+					<p>Lugar</p>
+				</div>
+				<div class="phone">
+					<h4><i class="fa fa-phone" aria-hidden="true"></i>Telefono</h4>
+					<p>Telefono</p>
+				</div>
+				<div class="email">
+					<h4><i class="fa fa-envelope" aria-hidden="true"></i>Correo</h4>
+					<p><a href="mailto:info@example.com">example@gmail.com</a></p>
+				</div>
+			</div>
+			<div class="col-md-7 col-sm-7" style="float: right; ">
+				<form action="/sugerencias" method="post">
+					<input type="text" name="nombre" placeholder="Ingrese su nombre" required="">
+					<input type="email" name="correo" placeholder="Ingrese su correo" required="">
+					<input type="text" name="asunto" placeholder="Asunto" required="">
+					<textarea name="texto" placeholder="Escriba su sugerencia" required=""></textarea>
+					<input type="submit" value="Enviar">
+				</form>
+			</div>
+		</div>
+	</div>
+    </div>
+    </div>

@@ -1,0 +1,192 @@
+{{> navbar}}
+<div class="banner"> 
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Proyecto</h3>
+                </div>
+                <div class="card-body">
+                    <span>Titulo: {{proyecto.titulo}}</span>
+                    <br>
+                    <span>Año de realizacion: {{proyecto.anioRealizacion}}</span>
+                    <br>
+                    <span>Inicio: {{#dateFormat proyecto.FechaInicio }} {{/dateFormat}}</span>
+                    <br>
+                    <span>Fin: {{#dateFormat proyecto.FechaFin }} {{/dateFormat}}</span>
+                    <br>
+                    {{#if proyecto.resumen}}
+                    Resumen: {{proyecto.resumen}}
+                    {{/if}}
+                    <br>
+                    <span>Tutor academico: {{proyecto.TutorAcademico}}</span>
+                    <br>
+                    <span>Tutor cliente: {{proyecto.TutorCliente}}</span>
+                    <br>
+                    <span>Empresa: {{proyecto.Empresa}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Grupo de proyecto</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Nota de aprobacion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each grupo}}
+                            <tr>
+                                <td>{{ 	NombreCompleto }}</td>
+                                <td>{{ Nota }}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Tribunal</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Empresa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each trib}}
+                            <tr>
+                                <td>{{ 	NombreCompleto }}</td>
+                                <td>{{ cargo }}</td>
+                                <td>{{ empresa }}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Galeria</h3>
+				</div>
+                <div class="card-body">
+                    <div id="demo" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/imagenes/img.png" width="300" height="300">
+                            </div>
+                            {{#each imgs}}
+                            <div class="carousel-item">
+                                <img src="{{Ruta}}" width="300" height="300">
+                            </div>
+                            {{/each}}
+                        </div>
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#if resu }}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Resumen</h3>
+				</div>
+                <div class="card-body">
+                    {{#each resu}}
+                    <iframe  src="{{Ruta}}" width="500" height="500"></iframe>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if vid}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Videos</h3>
+                </div>
+                <div class="card-body">
+                    {{#each vid}}
+                    <video src="{{ Ruta }}" width="640" height="480" controls></video>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Video Presentacion</h3>
+				</div>
+                <div class="card-body">
+                    {{#each vidPres}}
+                    <video src="{{ Ruta }}" width="640" height="480" controls></video>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Banner</h3>
+				</div>
+                <div class="card-body">
+                    {{#each banner}}
+                    <img  src="{{Ruta}}" width="500" height="500"></img>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

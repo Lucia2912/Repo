@@ -1,0 +1,57 @@
+{{> navbar}}
+<div class="banner">
+<div class="container p-9">
+  <div class="row">
+    <div class="col-md-9 mx-auto">
+      <div class="card text-center" style="border: 1px solid  #012c48">
+        <div class="card-header" style="border-bottom: 1px solid  #012c48">
+          <h3>Usuarios registrados</h3>
+        </div>
+        <div class="card-body">
+          <form class="form-inline md-form form-sm" action="/usuarios" method="POST">
+            <input class="form-control form-control-sm mr-3 w-50" name="filtro" type="text" placeholder="Buscar" aria-label="Buscar">
+            <button type="submit"  class="btn btn-primary"><i class="fas fa-search" aria-hidden="true"></i></button>
+          </form>
+          {{#if usuario}}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Registrado hace</th>
+                <th scope="col">Asignar permisos</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each usuario}}
+              <tr>
+                <td>{{Nombre}}</td>
+                <td>{{Apellido}}</td>
+                <td>{{Rol}}</td>
+                <td>{{#timeago FechaRegistro}}{{/timeago}}</td>
+                {{#ifEquals Rol "SuperAdministrador"}}
+                <td></td>
+                {{/ifEquals}}
+                {{#ifEquals Rol "Administrador"}}
+                <td><a href="/usuarios/roles/{{../id}}" class="btn btn-primary"><i class="fas fa-unlock"></i></a></td>
+                {{/ifEquals}}
+                {{#ifEquals Rol "Intermedio"}}
+                <td><a href="/usuarios/roles/{{../id}}" class="btn btn-primary"><i class="fas fa-unlock"></i></a></td>
+                {{/ifEquals}}
+                {{#ifEquals Rol "Visitante"}}
+                <td><a href="/usuarios/roles/{{../id}}" class="btn btn-primary"><i class="fas fa-unlock"></i></a></td>
+                {{/ifEquals}}
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+          {{else}}
+          <h3>No se encontro el usuario</h3>
+          {{/if}}
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    </div>

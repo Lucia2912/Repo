@@ -1,0 +1,204 @@
+{{> navbar}}
+<div class="banner"> 
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Pasantia</h3>
+				</div>
+                <div class="card-body">
+                    <span>Nombre de pasantia: {{pasantia.Nombre}}</span>
+                    <br>
+                    <span>Nombre del alumno: {{pasantia.NombreAlum}}</span>
+                    <br>
+                    <span>Generacion: {{pasantia.Generacion}}</span>
+                    <br>
+                    {{#ifEquals pasantia.Aprobo 1 }}
+                    <span>Aprobo: Si</span>
+                    {{/ifEquals}}
+                    {{#ifEquals pasantia.Aprobo 0 }}
+                    <span>Aprobo: No</span>
+                    {{/ifEquals}}
+                    <br>
+                    {{#ifEquals pasantia.VinculoLab 1 }}
+                    <span>Vinculo laboral: Si</span>
+                    {{/ifEquals}}
+                    {{#ifEquals pasantia.VinculoLab 0 }}
+                    <span>Vinculo laboral: No</span>
+                    {{/ifEquals}}
+                    <br>
+                    <span>Año de realizacion: {{pasantia.anioRealizacion}}</span>
+                    <br>
+                    <span>Inicio: {{#dateFormat pasantia.FecInicio }} {{/dateFormat}}</span>
+                    <br>
+                    <span>Fin: {{#dateFormat pasantia.FecFin }} {{/dateFormat}}</span>
+                    <br>
+                    {{#if pasantia.Tareas}}
+                    Tareas: {{pasantia.Tareas}}
+                    {{/if}}
+                    <br>
+                    <span>Tutor academico: {{pasantia.TutorA}}</span>
+                    <br>
+                    <span>Tutor cliente: {{pasantia.TutorCli}}</span>
+                    <br>
+                    <span>Empresa: {{pasantia.Empresa}}</span>
+                    <br>
+                    <span>Modalidad: {{pasantia.Modalidad}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#if imgs}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Galeria</h3>
+				</div>
+                <div class="card-body">
+                    <div id="demo" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/imagenes/img.png" width="300" height="300">
+                            </div>
+                            {{#each imgs}}
+                            <div class="carousel-item">
+                                <img src="{{Ruta}}" width="300" height="300">
+                            </div>
+                            {{/each}}
+                        </div>
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if docu}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Documentacion</h3>
+				</div>
+                <div class="card-body">
+                    {{#each docu}}
+                    <iframe  src="{{Ruta}}" width="500" height="500"></iframe>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if acuerdo}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Acuerdo</h3>
+				</div>
+                <div class="card-body">
+                    <iframe  src="{{acuerdo.Ruta}}" width="500" height="500"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if inicio}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Carta inicial</h3>
+				</div>
+                <div class="card-body">
+                    <iframe  src="{{inicio.Ruta}}" width="500" height="500"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if fin}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Carta de finalizacion</h3>
+				</div>
+                <div class="card-body">
+                    <iframe  src="{{fin.Ruta}}" width="500" height="500"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if invest}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Investigacion</h3>
+				</div>
+                <div class="card-body">
+                    {{#each invest}}
+                    <iframe  src="{{Ruta}}" width="500" height="500"></iframe>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if vidPres}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Video Presentacion</h3>
+				</div>
+                <div class="card-body">
+                    {{#each vidPres}}
+                    <video src="{{ Ruta }}" width="640" height="480" controls></video>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if cod}}
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+					<h3>Descargar codigo</h3>
+				</div>
+                <div class="card-body">
+                    <a href="/pasantias/descargarCodigo/{{pasantia.id}}">Codigo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+</div>

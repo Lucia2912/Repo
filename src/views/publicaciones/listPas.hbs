@@ -1,0 +1,78 @@
+{{> navbar}}
+<div class="banner"> 
+<div class="container p-9">
+	<div class="row">
+		<div class="col-md-9 mx-auto">
+			<div class="card text-center">
+				<div class="card-header">
+					<h3>Pasantias</h3>
+				</div>
+				<div class="card-body">
+					{{#if pasantias}}
+					<form class="form-inline md-form form-sm" method="POST" action="/pasantias">
+						<input class="form-control form-control-sm mr-3 w-50" name="filtro" type="text" placeholder="Buscar"
+							aria-label="Buscar">
+						<button type="submit" class="btn btn-primary"><i class="fas fa-search" aria-hidden="true"></i></button>
+					</form>
+					{{/if}}
+					<table class="table table-sm">
+						{{#if pasantias}}
+						<thead>
+							<tr>
+								<th scope="col">Nombre completo</th>
+								<th scope="col">Generacion</th>
+								<th scope="col">Ver detalles</th>
+								{{#if user}}
+								{{#ifEquals user.Rol "SuperAdministrador"}}
+								<th scope="col">Modificar</th>
+								<th scope="col">Eliminar</th>
+								{{/ifEquals}}
+								{{#ifEquals user.Rol "Administrador"}}
+								<th scope="col">Modificar</th>
+								<th scope="col">Eliminar</th>
+								{{/ifEquals}}
+								{{/if}}
+							</tr>
+						</thead>
+						<tbody>
+							{{#each pasantias}}
+							<tr>
+								<td>{{ NombreAlum }}</td>
+								<td>{{ Generacion }}</td>
+								{{#if ../user}}
+								{{#ifEquals ../user.Rol "Visitante"}}
+								<td><a href="/pasantias/detalles/{{../id}}" class="btn btn-info"><i class="far fa-eye"></i></a></td>
+								{{/ifEquals}}
+								{{#ifEquals ../user.Rol "Intermedio"}}
+								<td><a href="/pasantias/detalle/{{../id}}" class="btn btn-info"><i class="far fa-eye"></i></a></td>
+								{{/ifEquals}}
+								{{#ifEquals ../user.Rol "SuperAdministrador"}}
+								<td><a href="/pasantias/detalle/{{../id}}" class="btn btn-info"><i class="far fa-eye"></i></a></td>
+								<td><a href="/pasantias/editar/{{../id}}" class="btn btn-warning"><i class="far fa-edit"></i></a></td>
+								<td><a href="/pasantias/eliminar/{{../id}}" class="btn btn-danger"><i class="fas fa-times"></i></a></td>
+								{{/ifEquals}}
+								{{#ifEquals ../user.Rol "Administrador"}}
+								<td><a href="/pasantias/detalle/{{../id}}" class="btn btn-info"><i class="far fa-eye"></i></a></td>
+								<td><a href="/pasantias/editar/{{../id}}" class="btn btn-warning"><i class="far fa-edit"></i></a></td>
+								<td><a href="/pasantias/eliminar/{{../id}}" class="btn btn-danger"><i class="fas fa-times"></i></a></td>
+								{{/ifEquals}}
+								{{else}}
+								<td><a href="/pasantias/detalles/{{../id}}" class="btn btn-info"><i class="far fa-eye"></i></a></td>
+								{{/if}}
+							</tr>
+							{{/each}}
+						</tbody>
+						{{else}}
+						{{#if mensaje}}
+							<h3>{{mensaje}}</h3>
+						{{else}}
+							<h3>Aun no hay pasantias registradas</h3>
+							{{/if}}
+						{{/if}}
+					</table>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+		</div>

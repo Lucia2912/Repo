@@ -1,0 +1,93 @@
+{{> navbar}}
+<div class="banner"> 
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Informacion del usuario</h3>
+                </div>
+                <div class="card-body">
+                    <span>Nombre: {{usu.Nombre}}</span>
+                    <br>
+                    <span>Apellido: {{usu.Apellido}}</span>
+                    <br>
+                    <span>Correo: {{usu.Correo}}</span>
+                    <br>
+                    <span>Fecha de registro: {{#dateFormat usu.FechaRegistro}} {{/dateFormat}}</span>
+                    <br>
+                    <span>Relacion con el TIP: {{usu.RelacionTIP}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-9">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Asignar rol</h3>
+                </div>
+                <div class="card-body">
+                    <p>El administrador podra visualizar, borrar y modificar los datos de las pasantias y proyectos</p>
+                    <p>El intermedio podra visualizar todos los datos de las pasantias y proyectos</p>
+                    <p>El visitante podra visualizar solo algunos de los datos de pasantias y proyectos</p>
+                    <div class="form-group">
+                    <form action="/usuarios/roles/{{usu.id}}" method="post" id="msform">
+                    {{#ifEquals usu.Rol "Visitante"}}
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" value="Administrador" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label">Administrador</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="customRadio" value="Intermedio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio2">Intermedio</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio3" name="customRadio" value="Visitante" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="customRadio3">Visitante</label>
+                        </div>
+                        {{/ifEquals}}
+                        {{#ifEquals usu.Rol "Intermedio"}}
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" value="Administrador" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label">Administrador</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="customRadio" value="Intermedio" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="customRadio2">Intermedio</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio3" name="customRadio" value="Visitante" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio3">Visitante</label>
+                        </div>
+                        {{/ifEquals}}
+                        {{#ifEquals usu.Rol "Administrador"}}
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" value="Administrador" name="customRadio" class="custom-control-input" checked>
+                            <label class="custom-control-label">Administrador</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="customRadio" value="Intermedio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio2">Intermedio</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio3" name="customRadio" value="Visitante" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio3">Visitante</label>
+                        </div>
+                        {{/ifEquals}}
+                        <br>
+                        <div class="form-group">
+                            <button class="btn btn-success">
+                                Asignar rol
+                            </button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
